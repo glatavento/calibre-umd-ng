@@ -8,7 +8,9 @@ import struct
 import zlib
 from collections import namedtuple
 from pathlib import Path
-from typing import Literal, IO
+from typing import Literal, IO, Dict, List, Tuple
+
+__all__ = ['UMDFile']
 
 umd_io_logger = logging.Logger("umd-io", logging.INFO)
 stdout_handler = logging.StreamHandler()
@@ -40,7 +42,7 @@ Chapter = namedtuple("Chapter", "title content")
 
 class UMDFile:
     @staticmethod
-    def read_metadata(stream: IO, offset: int = None) -> tuple[dict, int]:
+    def read_metadata(stream: IO, offset: int = None) -> Tuple[Dict, int]:
         # offset == None : no offset
         # offset >= 0    : offset
         # offset <  0    : auto detect
@@ -120,7 +122,7 @@ class UMDFile:
         return metadata, stream.tell()
 
     @staticmethod
-    def read_content(stream: IO, offset: int = None) -> tuple[str, int]:
+    def read_content(stream: IO, offset: int = None) -> Tuple[str, int]:
         # offset == None : no offset
         # offset >= 0    : offset
         # offset <  0    : auto detect
@@ -171,7 +173,7 @@ class UMDFile:
         return content, stream.tell()
 
     @staticmethod
-    def read_cover(stream: IO, offset: int = None) -> tuple[bytes, int]:
+    def read_cover(stream: IO, offset: int = None) -> Tuple[bytes, int]:
         # offset == None : no offset
         # offset >= 0    : offset
         # offset <  0    : auto detect
@@ -205,7 +207,7 @@ class UMDFile:
                  publisher: str = None,
                  retailer: str = None,
                  cover: bytes = None,
-                 chapters: list[Chapter] = None,
+                 chapters: List[Chapter] = None,
                  **metadata):
         self.title = title
         self.author = author

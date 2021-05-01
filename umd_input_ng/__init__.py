@@ -4,7 +4,7 @@
 __author__ = "glatavento"
 __license__ = "GPL v3"
 __copyright__ = "2021, glatavento <glatavento@outlook.com>"
-__version__ = (0, 1, 0)
+__version__ = (0, 1, 1)
 
 import logging
 import uuid
